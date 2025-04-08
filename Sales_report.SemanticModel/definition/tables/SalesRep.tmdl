@@ -22,11 +22,13 @@ table SalesRep
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\NithishYE\Downloads\OrderDetails_Data\OrderDetails_Data\SalesRep.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Power_BI\SalesRep.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Use First Row as Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Change Type" = Table.TransformColumnTypes(#"Use First Row as Headers",{{"SalesRepID", Int64.Type}, {"SalesRepName", type text}})
 				in
 				    #"Change Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
