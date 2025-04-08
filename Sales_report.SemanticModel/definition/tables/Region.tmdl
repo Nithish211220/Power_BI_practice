@@ -1,0 +1,32 @@
+table Region
+	lineageTag: 85139983-228a-4844-90dd-11502ff2bbfd
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: d573eda8-a3fa-4fdb-a175-f172e97fa8c2
+		summarizeBy: none
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionName
+		dataType: string
+		lineageTag: 7f04b091-8710-4d3c-9d16-7eb0fb24e66f
+		summarizeBy: none
+		sourceColumn: RegionName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Region = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\NithishYE\Downloads\OrderDetails_Data\OrderDetails_Data\Region.csv"),[Delimiter=",", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RegionID", Int64.Type}, {"RegionName", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

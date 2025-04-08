@@ -1,0 +1,38 @@
+table TopProducts
+	lineageTag: e4092395-c386-461f-ae8d-2a2b612939fd
+
+	column ProductName
+		lineageTag: f081af97-c928-49c6-9230-b2378e8b769f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Product[ProductName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalSales
+		formatString: 0
+		lineageTag: 49b23045-8448-4bcf-805e-551e506b6fda
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TotalSales]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TopProducts = calculated
+		mode: import
+		source = ```
+				
+				    TOPN(
+				        5,
+				        SUMMARIZE(
+				            Sales,
+				            Product[ProductName],
+				            "TotalSales", SUM(Sales[SalesAmount])
+				        ),
+				        [TotalSales],
+				        DESC
+				    )
+				```
+
+	annotation PBI_Id = 3ee4e3c4d21c4e18852926971af4bc3b
+

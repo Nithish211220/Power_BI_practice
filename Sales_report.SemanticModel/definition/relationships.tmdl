@@ -1,0 +1,27 @@
+relationship AutoDetected_ae4094eb-4997-4ee9-ba52-d66d9067b381
+	fromColumn: Sales.CustomerID
+	toColumn: Customer.CustomerID
+
+relationship AutoDetected_21fa3608-b9d7-4e54-bf30-23c2b9fcf09f
+	fromColumn: Sales.ProductID
+	toColumn: Product.ProductID
+
+relationship AutoDetected_da278c9f-3f00-472d-afdd-15a3e9d54c81
+	fromColumn: Sales.RegionID
+	toColumn: Region.RegionID
+
+relationship AutoDetected_f5176b24-a2b2-4375-9019-962ca7fb2384
+	fromColumn: Sales.SalesRepID
+	toColumn: SalesRep.SalesRepID
+
+relationship 4c9dd1e1-bf7c-10f6-d35d-aee39d149a56
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Product.ProductName
+	toColumn: TopProducts.ProductName
+
+relationship a79abe68-e8f3-4a20-b178-989ab4441325
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.Formatted_date
+	toColumn: LocalDateTable_334cf84a-2a17-4e32-922a-3778e6e3552b.Date
+
